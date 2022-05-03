@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Usuarios",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/persons": {
+            "get": {
+                "summary": "Todos los registros",
+                "operationId": "4685697e7a3174da95fa203070e950ee",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los registros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/persons/{person}": {
+            "get": {
+                "summary": "Buscar persona",
+                "operationId": "b3018dbb23ea2ada984666bb2760e512",
+                "parameters": [
+                    {
+                        "name": "person",
+                        "in": "path",
+                        "description": "Person ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar información de cliente"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/personDetail": {
+            "get": {
+                "summary": "Todos los registros",
+                "operationId": "08e9d90adc8fed10410c9e158a123d47",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar Perfiles"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/personDetail/{person}": {
+            "get": {
+                "summary": "Buscar detalle por usuario ",
+                "operationId": "97a4ab1eb42c49ca7704e56a692cd09b",
+                "parameters": [
+                    {
+                        "name": "person",
+                        "in": "path",
+                        "description": "Person ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar perfiles por usuario"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
