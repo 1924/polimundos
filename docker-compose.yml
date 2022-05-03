@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: israel
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: app
+    container_name: polimundos-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./vendor:/var/www/vendor
+    networks:
+      - travellist
+
+  db:
+    image: mysql/mysql-server:8.0
+    container_name: polimundos-db
+    environment:
+      MYSQL_DATABASE: "polimundos"
+      MYSQL_ROOT_PASSWORD: "12345"
+      MYSQL_PASSWORD: "12345"
+      MYSQL_USER: jimmy
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker-compose/mysql:/var/lib/mysql:rw
+    networks:
+      travellist:
+
+  nginx:
+    image: nginx:alpine
+    container_name: polimundos-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - travellist
+
+networks:
+  travellist:
+    driver: bridge
